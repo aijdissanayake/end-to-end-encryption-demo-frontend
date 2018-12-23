@@ -55,8 +55,6 @@ class FormContainer extends Component {
     console.log(JSON.stringify(userData));
     let encrytedUserData = kare_enc.publicKeyEncrypt(JSON.stringify(userData), serverPubKey);
     console.log(encrytedUserData);
-    let decryptedUserData = kare_enc.privateKeyDecrypt(encrytedUserData, serverPvtKey);
-    console.log(decryptedUserData);
 
     fetch('http://dev.kure-api.com/encryption_test',{
         method: "POST",
@@ -69,9 +67,7 @@ class FormContainer extends Component {
           console.log('recieved');
           console.log(response)
           response.json().then(data =>{
-            console.log("Successful\n" + data['recieved_data']);
-            let dec = kare_enc.privateKeyDecrypt(data['recieved_data'], serverPvtKey);
-            console.log(dec);
+            console.log("Successful\n" + data['status'] + "\n" + data['recieved_data']);
           })
     })
   }   
